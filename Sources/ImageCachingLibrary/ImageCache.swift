@@ -10,7 +10,7 @@ import UIKit
 
 @available(iOS 15, *)
 public class ImageCache {
-    static let shared = ImageCache()
+    static public let shared = ImageCache()
     private var cache = CacheDisk<Data>()
     private let cacheQueue = DispatchQueue(label: "cacheQueue")
 
