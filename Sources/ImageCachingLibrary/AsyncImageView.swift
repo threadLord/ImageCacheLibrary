@@ -11,6 +11,13 @@ import SwiftUI
 public struct AsyncImageView: View {
     public let url: URL
     public let placeholder: Image
+    
+    public init(url: URL, placeholder: Image, image: UIImage? = nil) {
+        self.url = url
+        self.placeholder = placeholder
+        self.image = image
+    }
+    
 
     @State private var image: UIImage?
 
