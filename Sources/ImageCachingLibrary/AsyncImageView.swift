@@ -9,8 +9,8 @@ import SwiftUI
 
 @available(iOS 15, *)
 public struct AsyncImageView: View {
-    let url: URL
-    let placeholder: Image
+    public let url: URL
+    public let placeholder: Image
 
     @State private var image: UIImage?
 
