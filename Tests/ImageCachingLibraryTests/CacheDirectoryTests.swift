@@ -43,7 +43,7 @@ final class CacheDirectoryTests: XCTestCase {
     
     
     func testCacheWriteAndGetData_KeyAndValuePair_ValueEqualNotEqualForTheSameKey() {
-        var sutImage = CacheDisk<Data>()
+        let sutImage = CacheDisk<Data>()
         
         let key: String = "1"
         let value: Data = "Hello".data(using: .utf8)!
@@ -56,7 +56,7 @@ final class CacheDirectoryTests: XCTestCase {
     }
     
     func testCacheWriteAndGetData_KeyAndValuePair_ValueEqualForTheSameKey() {
-        var sutImage = CacheDisk<Data>()
+        let sutImage = CacheDisk<Data>()
         let key: String = "1"
         let value: Data = "Hello".data(using: .utf8)!
         let save = sutImage.save(value, forKey: "1")

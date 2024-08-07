@@ -12,8 +12,4 @@ final class ImageCachingLibraryTests: XCTestCase {
                 .aspectRatio(contentMode: .fit)
         })
     }
-    
-    func testImageCache() {
-        ImageCache.shared.setCache(cache: CacheDisk<Data>())
-    }
 }

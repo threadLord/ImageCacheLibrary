@@ -19,7 +19,6 @@ final class CacheDisk<Value: Codable> {
             fatalError("Unable to access Documents directory")
         }
         self.cacheDirectory = documentsDirectory.appendingPathComponent(cacheFolder, conformingTo: .folder)
-        print("Cache folder: \(cacheDirectory)")
         do {
             try FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true, attributes: nil)
         } catch {

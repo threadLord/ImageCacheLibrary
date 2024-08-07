@@ -25,7 +25,7 @@ public class AsyncImageViewUIKit: UIImageView {
     }
 }
 
-struct AsyncImageViewUIKitRepresentable: UIViewRepresentable {
+public struct AsyncImageViewUIKitRepresentable: UIViewRepresentable {
     @Binding public var url: String
     @Binding public var key: String
     @Binding public var placeholder: String
