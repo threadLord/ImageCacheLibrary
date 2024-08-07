@@ -8,24 +8,25 @@
 import SwiftUI
 
 @available(iOS 15, *)
-public struct AsyncImageView: View {
+public struct AsyncImageView<Content: View, Placeholder: View>: View {
     public let url: URL
-    public let placeholder: Image
+    public let placeholder: () -> Placeholder
+    public var imageClosure: (UIImage) -> Content
     
-    public init(url: URL, placeholder: Image, image: UIImage? = nil) {
+    public init(url: URL, placeholder: @escaping () -> Placeholder, image: UIImage? = nil, imageClosure: @escaping (UIImage) -> Content) {
         self.url = url
         self.placeholder = placeholder
         self.image = image
+        self.imageClosure = imageClosure
     }
-    
 
     @State private var image: UIImage?
 
     public var body: some View {
         if let image = image {
-            Image(uiImage: image)
+            imageClosure(image)
         } else {
-            placeholder
+            placeholder()
                 .onAppear {
                     if let key = url.absoluteString.components(separatedBy:"/").last {
                         ImageCache.shared.loadImage(url: url, key: key) { loadedImage in
@@ -39,6 +40,10 @@ public struct AsyncImageView: View {
 
 #Preview {
     AsyncImageView(url: URL(string: "https://zipoapps-storage-test.nyc3.digitaloceanspaces.com/17_4691_besplatnye_kartinki_volkswagen_golf_1920x1080.jpg")!,
-                   placeholder: Image(systemName: "photo"))
+                   placeholder: { Image(systemName: "photo") }, imageClosure: {  image in
+        Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+    })
     .padding()
 }
