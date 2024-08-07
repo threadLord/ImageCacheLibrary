@@ -28,8 +28,8 @@ public struct AsyncImageView: View {
                 .aspectRatio(contentMode: .fit)
         } else {
             placeholder
-                .aspectRatio(contentMode: .fit)
-                .padding(16)
+//                .aspectRatio(contentMode: .fit)
+//                .padding(16)
                 .onAppear {
                     if let key = url.absoluteString.components(separatedBy:"/").last {
                         ImageCache.shared.loadImage(url: url, key: key) { loadedImage in

@@ -11,8 +11,12 @@ import UIKit
 @available(iOS 15, *)
 public class ImageCache {
     static public let shared = ImageCache()
-    private var cache = CacheDisk<Data>()
+    var cache = CacheDisk<Data>()
     private let cacheQueue = DispatchQueue(label: "cacheQueue")
+    
+    func setCache(cache: CacheDisk<Data>) {
+        self.cache = cache
+    }
 
     public func loadImage(url: URL, key: String, completion: @escaping (UIImage?) -> Void) {
         cacheQueue.async {

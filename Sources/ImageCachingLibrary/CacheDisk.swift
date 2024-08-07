@@ -14,11 +14,12 @@ final class CacheDisk<Value: Codable> {
     private let dateProvider: () -> Date
     private let entryLifetime: TimeInterval
 
-    public init(dateProvider: @escaping () -> Date = Date.init, entryLifetime: TimeInterval = 4 * 60 * 60) {
+    public init(cacheFolder: String = "CacheFolder", dateProvider: @escaping () -> Date = Date.init, entryLifetime: TimeInterval = 4 * 60 * 60) {
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("Unable to access Documents directory")
         }
-        self.cacheDirectory = documentsDirectory
+        self.cacheDirectory = documentsDirectory.appendingPathComponent(cacheFolder, conformingTo: .folder)
+        print("Cache folder: \(cacheDirectory)")
         do {
             try FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true, attributes: nil)
         } catch {
@@ -100,7 +101,7 @@ final class CacheDisk<Value: Codable> {
         }
     }
 
-    final class Entry: Codable {
+    public final class Entry: Codable {
         let key: String
         let value: Value
         let expirationDate: Date
