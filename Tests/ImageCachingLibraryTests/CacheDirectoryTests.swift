@@ -65,4 +65,29 @@ final class CacheDirectoryTests: XCTestCase {
         let fetchedValue = sutImage.value(forKey: key)?.value
         XCTAssertEqual(fetchedValue, value, "Same value")
     }
+    
+    func testCacheWriteAndGetDataCacheDuration_KeyAndValuePair_ValueNotEqualForTheSameKey() {
+        let sutImage = CacheDisk<Data>(entryLifetime: 0)
+        let key: String = "1"
+        let value: Data = "Hello".data(using: .utf8)!
+        let save = sutImage.save(value, forKey: "1")
+        XCTAssertTrue(save, "Didn't save the text")
+        
+        let fetchedValue = sutImage.value(forKey: key)?.value
+        XCTAssertNil(fetchedValue, "Same value")
+    }
+    
+    func testCacheWriteAndDeleteAll_KeyAndValuePair_ValueEqualForTheSameKey() {
+        let sutImage = CacheDisk<Data>(entryLifetime: 0)
+        let key: String = "1"
+        let value: Data = "Hello".data(using: .utf8)!
+        let save = sutImage.save(value, forKey: "1")
+        XCTAssertTrue(save, "Didn't save the text")
+        
+        let _ = sutImage.deleteAll()
+        
+        let fetchedValue = sutImage.value(forKey: key)?.value
+        
+        XCTAssertNotEqual(fetchedValue, value, "Same value")
+    }
 }

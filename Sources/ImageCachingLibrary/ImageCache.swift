@@ -11,8 +11,12 @@ import UIKit
 @available(iOS 15, *)
 public class ImageCache {
     static public let shared = ImageCache()
-    var cache = CacheDisk<Data>()
-    private let cacheQueue = DispatchQueue(label: "cacheQueue")
+    private var cache = CacheDisk<Data>()
+    private let cacheQueue = DispatchQueue(label: "cacheQueue", qos: .userInteractive)
+    
+    public func change(cache: CacheDisk<Data>) {
+        self.cache = cache
+    }
 
     public func loadImage(url: URL, key: String, completion: @escaping (UIImage?) -> Void) {
         cacheQueue.async {
@@ -43,7 +47,6 @@ public class ImageCache {
     public func deleteCache(with keys: [String]) {
         cacheQueue.async {
             keys.forEach{  let _ = self.cache.deleteFromDisk(forKey:$0)}
-            let _ =  self.cache.deleteAll()
         }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 @available(iOS 15, *)
-final class CacheDisk<Value: Codable> {
+final public class CacheDisk<Value: Codable> {
     private let cacheDirectory: URL
     private let dateProvider: () -> Date
     private let entryLifetime: TimeInterval
@@ -66,7 +66,7 @@ final class CacheDisk<Value: Codable> {
                 }
             }
             return true
-        }  catch  {
+        } catch {
             return false
         }
     }
@@ -105,7 +105,7 @@ final class CacheDisk<Value: Codable> {
         let value: Value
         let expirationDate: Date
 
-        init(key: String, value: Value, expirationDate: Date) {
+        public init(key: String, value: Value, expirationDate: Date) {
             self.key = key
             self.value = value
             self.expirationDate = expirationDate
