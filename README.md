@@ -1,10 +1,10 @@
-**AsyncImageView**
+**ImageCacheLibrary**
 
-*AsyncImageView* is a Swift package that provides an asynchronous image view for SwiftUI. It allows you to load images from URLs and cache them efficiently.
+*ImageCacheLibrary* is a Swift package that provides an asynchronous image view (**AsyncImageView**) for SwiftUI. It allows you to load images from URLs and cache them efficiently.
 
 
 **Installation**
-You can add AsyncImageView to your project using Swift Package Manager. In Xcode, go to *File > Swift Packages > Add Package Dependency* and enter the repository URL:
+You can add ImageCacheLibrary to your project using Swift Package Manager. In Xcode, go to *File > Swift Packages > Add Package Dependency* and enter the repository URL:
 
 https://github.com/threadLord/ImageCacheLibrary.git
 
@@ -64,6 +64,7 @@ ImageCache.shared.loadImage(url: imageUrl) { loadedImage in
         // Handle the failure (e.g., show an error message)
     }
 }
+
 ```
 
 4. Delete Cache with urls:
