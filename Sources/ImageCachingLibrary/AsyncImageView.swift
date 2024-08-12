@@ -28,7 +28,7 @@ public struct AsyncImageView<Content: View, Placeholder: View>: View {
         } else {
             placeholder()
                 .onAppear {
-                    if let key = url.absoluteString.components(separatedBy:"/").last {
+                    if let key = Utils.createKey(from: url) {
                         ImageCache.shared.loadImage(url: url, key: key) { loadedImage in
                             self.image = loadedImage
                         }

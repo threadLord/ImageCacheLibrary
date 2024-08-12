@@ -24,7 +24,7 @@ class AsyncImageViewUIKitTests: XCTestCase {
     func testLoadImageWithValidURL() {
         let expectation = expectation(description: "loading expectation")
         let placeholderImage = UIImage(named: "placeholder")
-        asyncImageView.loadImage(url: "https://example.com/image.jpg", key: "uniqueKey", placeholder: "placeholder")
+        asyncImageView.loadImage(url: "https://example.com/image.jpg", placeholder: "placeholder")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             expectation.fulfill()
@@ -35,7 +35,7 @@ class AsyncImageViewUIKitTests: XCTestCase {
     }
 
     func testLoadImageWithInvalidURL() {
-        asyncImageView.loadImage(url: "invalid-url", key: "uniqueKey", placeholder: "placeholder")
+        asyncImageView.loadImage(url: "invalid-url", placeholder: "placeholder")
 
         let placeholderImage = UIImage(named: "placeholder")
         XCTAssertEqual(asyncImageView.image, placeholderImage)

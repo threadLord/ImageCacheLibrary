@@ -44,9 +44,18 @@ public class ImageCache {
         }.resume()
     }
     
-    public func deleteCache(with keys: [String]) {
+    public func deleteCache(with urls: [String]) {
         cacheQueue.async {
-            keys.forEach{  let _ = self.cache.deleteFromDisk(forKey:$0)}
+            urls
+                .forEach { url in
+                   if let key = Utils.createKeyFrom(urlString: url) {
+                        let _ = self.cache.deleteFromDisk(forKey: key)
+                   }
+                }
         }
+    }
+    
+    public func deleteAllCache() -> Bool {
+        return cache.deleteAll()
     }
 }
